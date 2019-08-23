@@ -6,11 +6,17 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import axios from 'axios';
 
 class App extends Component {
+	state = {
+		cryptos: []
+	}
 	componentDidMount(){
 		axios.get('https://api.coingecko.com/api/v3/coins?order=rank_desc&per_page=100')
 		.then(function (response) {
 			console.log('success')
 			console.log(response);
+			this.setState({
+				cryptos: response.data.slice(0, 10)
+			})
 		})
 		.catch(function (err) {
 			console.log('err')
@@ -18,10 +24,18 @@ class App extends Component {
 		})
 	}
 	render() {
+		const { cryptos } = this.state;
+		const cryptosList = cryptos.length ? (
+			cryptos.map(cryptos => {
+
+
+
+				//enter code here!!!!!!
+			})
+		)
 		return (
 			<div>
 				<h1>Hello World</h1>
-
 				<h2>Git test hellooooo</h2>
 				
 				<Button variant="contained">
