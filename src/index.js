@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Button from '@material-ui/core/Button';
-import SvgIcon from '@material-ui/core/SvgIcon';
+//import Button from '@material-ui/core/Button';
+//import SvgIcon from '@material-ui/core/SvgIcon';
 import axios from 'axios';
 
 class App extends Component {
 	state = {
-		cryptos: []
+		cryptos: [ ]
 	}
 	componentDidMount(){
 		axios.get('https://api.coingecko.com/api/v3/coins?order=rank_desc&per_page=100')
-		.then(function (response) {
-			console.log('success')
-			console.log(response);
+		.then(response => {
+			console.log('success!', response)
 			this.setState({
-				cryptos: response.data.slice(0, 10)
+				cryptos: response.data
 			})
 		})
 		.catch(function (err) {
@@ -25,28 +24,27 @@ class App extends Component {
 	}
 	render() {
 		const { cryptos } = this.state;
-		const cryptosList = cryptos.length ? (
+		const cryptosList = cryptos.length ? ( //if something in my array do this then store in cryptosList
 			cryptos.map(cryptos => {
+				return (
+					<div key={cryptos.id}>
+					<div><p>
+					<img src={cryptos.image.small} alt={cryptos.image.small}></img>
+						Name: {cryptos.name}, Symbol: {cryptos.symbol},
 
-
-
-				//enter code here!!!!!!
-			})
+						Current Price (eur): {cryptos.market_data.current_price.eur}
+					 </p></div>
+					</div>
+				)})
+	)   : (
+			<div>No cryptos yet</div>//else, render this if no bitcoins in state
 		)
-		return (
+		 return (
 			<div>
-				<h1>Hello World</h1>
-				<h2>Git test hellooooo</h2>
-				
-				<Button variant="contained">
-					Default
-				</Button>
-				<SvgIcon>
-				<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-			</SvgIcon>
+				{cryptosList}
 			</div>
 		)
-	}
+		}
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
