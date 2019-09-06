@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* .Navbar {
+  background-color: red;
+}
+
+ul {
+  list-style-type: none;
+} */
+
+
+.center {
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+}
+
+.coinImage {
+  height: 100px;
+
+}
+
+.dv-star-rating {
+  color: yellow;
+}
